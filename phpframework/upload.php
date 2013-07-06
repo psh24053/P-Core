@@ -23,6 +23,9 @@ if(empty($_FILES) === false){
 	 * 用Md5来生成文件名，并且将上传好的文件从缓存目录中移动到指定目录
 	 */
 	$file_md5_name = md5(time());
+	if(!file_exists("files")){
+		mkdir("files");
+	}
 	move_uploaded_file($_FILES["file"]["tmp_name"], 'files/'.$file_md5_name);
 
 	include 'service/class_fileService.php';

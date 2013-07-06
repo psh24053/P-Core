@@ -117,11 +117,11 @@ class ixg_mysql{
 	 */
 	function __construct(){
 		$this->host = 'localhost';
-		$this->user = 'panshihao_cn';
-		$this->pass = 'caicai520';
-		$this->dbname = 'panshihao_cn';
+		$this->user = 'root';
+		$this->pass = 'root';
+		$this->dbname = 'laoyou';
 		$this->charset = 'utf-8';
-		$this->newlink = 'mytask_mysql_link';
+		$this->newlink = 'laoyou_mysql_link';
 	}
 
 	/**
@@ -201,6 +201,20 @@ class ixg_mysql{
 	function getResult(){
 		return $this->result;
 	}
+}
+
+/**
+ * 本地请求action,返回完整的action Json对象
+ * @param int $cod
+ * @param object $prm
+ */
+function localRequestAction($cod, $prm){
+	
+	$json->cod = $cod;
+	$json->prm = isset($prm) ? $prm : '{}';
+	
+	return handlerRequest(json_encode($json), true);
+	
 }
 
 /**

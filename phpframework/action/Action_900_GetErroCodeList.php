@@ -10,7 +10,7 @@ $pld->list = array(
 	'5002'=>'错误'
 );
 
-toResponseSuccess($actionInfo,$pld);
+return toResponseSuccess($actionInfo,$pld,$local);
 
 
 
