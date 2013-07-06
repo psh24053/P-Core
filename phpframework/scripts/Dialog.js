@@ -1,7 +1,7 @@
 /**
  * Alert组件
  */
-mytask.Alert = function(str, tit, onResult){
+phpframework.Alert = function(str, tit, onResult){
 	
 	if(tit == null || tit == undefined){
 		tit = '提示';
@@ -26,7 +26,7 @@ mytask.Alert = function(str, tit, onResult){
 /**
  * Confirm组件
  */
-mytask.Confirm = function(str, tit, onResult){
+phpframework.Confirm = function(str, tit, onResult){
 	
 	if(tit == null || tit == undefined){
 		tit = '询问';
@@ -54,11 +54,11 @@ mytask.Confirm = function(str, tit, onResult){
 	});
 	
 };
-mytask.WaitArray = new Array();
+phpframework.WaitArray = new Array();
 /**
  * 等待窗口组件
  */
-mytask.WaitAlert = function(str, tit, id){
+phpframework.WaitAlert = function(str, tit, id){
 	
 	
 	if(tit == null || tit == undefined){
@@ -95,7 +95,7 @@ mytask.WaitAlert = function(str, tit, id){
 		
 		$('.ui-dialog-title:contains('+tit+')').parent().remove();
 
-		mytask.WaitArray.push(this);
+		phpframework.WaitArray.push(this);
 	};
 	
 	this.setText = function(txt){
@@ -109,8 +109,8 @@ mytask.WaitAlert = function(str, tit, id){
 		
 	};
 	this.closeAll = function(){
-		for(var i = 0 ; i < mytask.WaitArray.length ; i ++){
-			mytask.WaitArray.pop().close();
+		for(var i = 0 ; i < phpframework.WaitArray.length ; i ++){
+			phpframework.WaitArray.pop().close();
 		}
 	};
 	
@@ -119,7 +119,7 @@ mytask.WaitAlert = function(str, tit, id){
 /**
  * Propmt组件
  */
-mytask.Propmt = function(text, hint, tit, onResult){
+phpframework.Propmt = function(text, hint, tit, onResult){
 	
 	if(hint == null || hint == undefined){
 		hint = '';

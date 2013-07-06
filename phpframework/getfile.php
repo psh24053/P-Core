@@ -40,31 +40,25 @@ while ($file_name = readdir($file_handler)){
 	 */
 	if($file_name == $FID){
 		
-
-		/*
-		 * 前往数据库查找file信息
-		 */
-		$db = new ixg_mysql();
-		$db->Connect();
-		$db->query('select * from my_files where file_id = "'.$file_name.'"');
 		
-		if($db->isGo() && $db->getSelectNum() > 0){
-			$row = $db->getRow();
+		include 'service/class_fileService.php';
+		
+		
+		$fileService = new fileService();
+		
+		
+		$files = $fileService->Select($file_name, 0, 1);
+		
+		if(count($files) > 0){
+			$row = $files[0];
 			$mimeType = $row['file_mime'];
 			$fileSize = $row['file_size'];
 			$fileSourceName = $row['file_name'];
 		}else{
-			/*
-			 * 关闭IO句柄，并结束运行
-			*/
-			$db->Close();
 			closedir($file_handler);
 			echo '查找文件信息错误';
 			exit ();
 		}
-		
-		$db->Close();
-			
 		
 		/*
 		 * 打开文件流，设置为只读权限

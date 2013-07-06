@@ -22,24 +22,20 @@ if(empty($_FILES) === false){
 	/*
 	 * 用Md5来生成文件名，并且将上传好的文件从缓存目录中移动到指定目录
 	 */
-	$file_name = md5(time());
-	move_uploaded_file($_FILES["file"]["tmp_name"], 'files/'.$file_name);
+	$file_md5_name = md5(time());
+	move_uploaded_file($_FILES["file"]["tmp_name"], 'files/'.$file_md5_name);
+
+	include 'service/class_fileService.php';
 	
-	/*
-	 * 创建数据库对象，执行插入到数据库的语句
-	 */
-	$db = new ixg_mysql();
-	$db->Connect(null);
-	$sql = "insert into my_files(file_id, file_name, file_mime, file_size, createtime) values('".$file_name."','".$_FILES["file"]['name']."','".$_FILES["file"]['type']."','".$_FILES["file"]['size']."',".time().")";
-	$db->query($sql);
+	$fileService = new fileService();
 	
-	if($db->isGo() && $db->getUpdateNum() > 0){
-		
-	}else{
-		echo JS_alert('sql excption: '.$db->getError());
-	}
+	$file->file_id = $file_md5_name;
+	$file->file_name = $_FILES["file"]['name'];
+	$file->file_mime = $_FILES["file"]['type'];
+	$file->file_size = $_FILES["file"]['size'];
+	$file->createtime = time();
 	
-	$db->Close();
+	$fileService->Insert($file);
 	
 	
 	/*
@@ -51,8 +47,7 @@ if(empty($_FILES) === false){
 		/*
 		 * 先触发回调事件，然后调用JQuery删除上传组件
 		 */
-		echo JS_func('parent.uploadComplate("'.$id.'","'.$file_name.'")');
-// 		echo JS_func('parent.$("#'.$id.'").remove()');
+		echo JS_func('parent.uploadComplate("'.$id.'","'.$file_md5_name.'")');
 	}
 	
 }else{
