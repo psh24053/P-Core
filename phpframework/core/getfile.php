@@ -1,5 +1,5 @@
 <?php
-include 'system.php';
+include 'core.php';
 /**
  * 根据fid获取文件
  */
@@ -17,7 +17,7 @@ if(!isset($_GET['fid'])){
 /*
  * 目标文件夹
  */
-$file_dir = 'files/';
+$file_dir = '../files/';
 /*
  * 目标文件夹句柄
  */
@@ -39,10 +39,6 @@ while ($file_name = readdir($file_handler)){
 	 * 如果文件名称与FID一致，执行文件输出逻辑
 	 */
 	if($file_name == $FID){
-		
-		
-		include 'service/class_fileService.php';
-		
 		
 		$fileService = new fileService();
 		

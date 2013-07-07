@@ -1,6 +1,6 @@
 <?php
 
-include 'system.php';
+include 'core.php';
 /**
  * 文件上传
  */
@@ -23,14 +23,13 @@ if(empty($_FILES) === false){
 	 * 用Md5来生成文件名，并且将上传好的文件从缓存目录中移动到指定目录
 	 */
 	$file_md5_name = md5(time());
-	if(!file_exists("files")){
-		mkdir("files");
+	if(!file_exists("../files/")){
+		mkdir("../files/");
 	}
-	move_uploaded_file($_FILES["file"]["tmp_name"], 'files/'.$file_md5_name);
+	move_uploaded_file($_FILES["file"]["tmp_name"], '../files/'.$file_md5_name);
 
-	include 'service/class_fileService.php';
 	
-	$fileService = new fileService();
+	$fileService = new FileService();
 	
 	$file->file_id = $file_md5_name;
 	$file->file_name = $_FILES["file"]['name'];
@@ -57,7 +56,3 @@ if(empty($_FILES) === false){
 	JS_alert('上传时出现错误！');
 }
 
-
-
-
-// echo '<script>parent.uploadComplate("干干尴尬");</script>';

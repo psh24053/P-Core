@@ -2,7 +2,7 @@
 /**
  * 接收数据参数
  */
-include 'system.php';
+include 'core.php';
 /*
  * 判断请求方式
  */
