@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	*/
 	$json = file_get_contents("php://input");	
 
-	handlerRequest($json);
+	echo json_encode(handlerRequest($json));
 }else{
 	/*
 	 * 判断json参数在get中是否存在，如果不存在则exit()
@@ -22,6 +22,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}else{
 		$json = $_GET['json'];
 	}
-	handlerRequest($json);
+	echo json_encode(handlerRequest($json));
 }
 

@@ -13,18 +13,9 @@ class testAction extends Action {
 	
 	public function doAction($action) {
 		
-		$prm = $action->prm;
 		
 		
-		if(!isset($prm)){
-			self::toError($action, 5001, 'prm not found');
-		}
-		
-		$pld->msg = "good";
-		
-		
-		// TODO Auto-generated method stub
-		return self::toSuccess($action, $pld);	
+		return $this->toSuccess($action, null);
 	}
 
 	
