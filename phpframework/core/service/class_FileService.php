@@ -1,5 +1,5 @@
 <?php
-class FileService {
+class FileService extends Service {
 	
 	
 	/**
