@@ -1,5 +1,19 @@
 <?php
 /**
+ * 本地请求
+ * @param int $cod
+ * @param object $prm
+ * @return object
+ */
+function localRequest($cod, $prm){
+	
+	$action->cod = $cod;
+	$action->prm = isset($prm) ? $prm : '{}';
+	
+	return handlerRequest(json_encode($action));
+	
+}
+/**
  * 处理请求
  * @param $json json参数
  * @return object
