@@ -1,4 +1,4 @@
-phpFramework
+P-Core
 ============
 
-phpFramework
+P-Core
