@@ -58,7 +58,7 @@ function handlerRequest($json){
 	*/
 	if($jsonObject == NULL){
 		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_NOT_JSON_STRING, 0);
-		log_error($responseError);
+		log_error('request error: ' . json_encode($responseError));
 		return $responseError;
 	}
 	/*
@@ -66,7 +66,7 @@ function handlerRequest($json){
 	*/
 	if(!validationRequest($jsonObject)){
 		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_ACTION_FORMAT_ERROR, 0);
-		log_error($responseError);
+		log_error('request error: ' . json_encode($responseError));
 		return $responseError;
 	}
 	$actions = $GLOBALS['actions'];
@@ -76,14 +76,18 @@ function handlerRequest($json){
 	$cod = $jsonObject->cod;
 	if(!array_key_exists($cod, $actions)){
 		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_ACTION_NOT_FOUND, $cod);
-		log_error($responseError);
+		log_error('request error: ' . json_encode($responseError));
 		return $responseError;
 	}
 	log_debug("action info ".json_encode($actions[$cod]));
 
 	$a = $actions[$cod];
 	
-	return $a->instance->doAction($jsonObject);
+	$responseContent = $a->instance->doAction($jsonObject);
+	
+	log_debug("handler response ".json_encode($responseContent));
+	
+	return $responseContent;
 
 }
 /**
