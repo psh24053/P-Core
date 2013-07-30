@@ -7,6 +7,14 @@ function log_error($msg){
 	log_write($msg, 1, 'ERROR');
 }
 /**
+ * 打印errorCode
+ * @param int $errorCode
+ * @param string $errorMsg
+ */
+function log_error_code($errorCode, $errorMsg){
+	log_write('ErrorCode -> ' . $errorCode . ' ,ErrorMsg -> ' . $errorMsg, 1, 'ERROR');
+}
+/**
  * 打印调试信息
  * @param string $msg
  */
