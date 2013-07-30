@@ -14,6 +14,30 @@ function localRequest($cod, $prm){
 	
 }
 /**
+ * 返回错误信息
+ * @param int $errorCode
+ * @param string $customMsg
+ */
+function responseErrorByString($errorCode, $customMsg = ""){
+	$response = 'ErrorCode -> ' . $errorCode . ' ,ErrorMsg -> ' . ErrorCode::$ERROR_CODE[$errorCode] . ' ,CustomMsg -> ' . $customMsg;
+	
+	return $response;
+}
+/**
+ * 返回错误信息，格式为json
+ * @param int $errorCode
+ * @param string $customMsg
+ */
+function responseErrorByJSON($errorCode, $actionCode, $customMsg = ""){
+	$response->cod = $actionCode;
+	$response->res = false;
+	$response->prm->errorCode = $errorCode;
+	$response->prm->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
+	$response->prm->customMsg = $customMsg;
+	
+	return json_encode($response);
+}
+/**
  * 处理请求
  * @param $json json参数
  * @return object
@@ -26,15 +50,17 @@ function handlerRequest($json){
 	 * 如果jsonobject对象为null，则说明$json不是一个JSON字符串
 	*/
 	if($jsonObject == NULL){
-		log_error("This is not json String !");
-		return 'This is not json String !';
+		$responseError = responseErrorByString(ErrorCode::ERROR_CODE_NOT_JSON_STRING);
+		log_error($responseError);
+		return $responseError;
 	}
 	/*
 	 * 验证json的格式是否正确
 	*/
 	if(!validationRequest($jsonObject)){
-		log_error("Action format error !");
-		return 'Action format error !';
+		$responseError = responseErrorByString(ErrorCode::ERROR_CODE_ACTION_FORMAT_ERROR);
+		log_error($responseError);
+		return $responseError;
 	}
 	$actions = $GLOBALS['actions'];
 	/*
@@ -42,8 +68,9 @@ function handlerRequest($json){
 	*/
 	$cod = $jsonObject->cod;
 	if(!array_key_exists($cod, $actions)){
-		log_error('action '.$cod.' not found !');
-		return 'action '.$cod.' not found !';
+		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_ACTION_NOT_FOUND, $cod);
+		log_error($responseError);
+		return $responseError;
 	}
 	log_debug("action info ".json_encode($actions[$cod]));
 
