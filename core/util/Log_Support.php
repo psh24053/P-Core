@@ -11,8 +11,8 @@ function log_error($msg){
  * @param int $errorCode
  * @param string $errorMsg
  */
-function log_error_code($errorCode, $errorMsg){
-	log_write('ErrorCode -> ' . $errorCode . ' ,ErrorMsg -> ' . $errorMsg, 1, 'ERROR');
+function log_error_code($errorCode, $customMsg = ""){
+	log_write('ErrorCode -> ' . $errorCode . ' ,ErrorMsg -> ' . ErrorCode::$ERROR_CODE[$errorCode] . ' ,CustomMsg -> ' . $customMsg, 1, 'ERROR');
 }
 /**
  * 打印调试信息
