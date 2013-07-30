@@ -1,4 +1,0 @@
-phpFramework
-============
-
-phpFramework
