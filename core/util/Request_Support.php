@@ -3,14 +3,21 @@
  * 本地请求
  * @param int $cod
  * @param object $prm
+ * @param boolean $object true代表返回类型为对象，false代表返回类型为字符串
  * @return object
  */
-function localRequest($cod, $prm){
+function localRequest($cod, $prm, $object = true){
 	
 	$action->cod = $cod;
 	$action->prm = isset($prm) ? $prm : '{}';
 	
-	return handlerRequest(json_encode($action));
+	$response = handlerRequest(json_encode($action));
+	
+	if($object){
+		return $response;
+	}else{
+		return json_encode($response);
+	}
 	
 }
 /**
@@ -35,7 +42,7 @@ function responseErrorByJSON($errorCode, $actionCode, $customMsg = ""){
 	$response->pld->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
 	$response->pld->customMsg = $customMsg;
 	
-	return json_encode($response);
+	return $response;
 }
 /**
  * 处理请求
@@ -50,7 +57,7 @@ function handlerRequest($json){
 	 * 如果jsonobject对象为null，则说明$json不是一个JSON字符串
 	*/
 	if($jsonObject == NULL){
-		$responseError = responseErrorByString(ErrorCode::ERROR_CODE_NOT_JSON_STRING);
+		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_NOT_JSON_STRING, 0);
 		log_error($responseError);
 		return $responseError;
 	}
@@ -58,7 +65,7 @@ function handlerRequest($json){
 	 * 验证json的格式是否正确
 	*/
 	if(!validationRequest($jsonObject)){
-		$responseError = responseErrorByString(ErrorCode::ERROR_CODE_ACTION_FORMAT_ERROR);
+		$responseError = responseErrorByJSON(ErrorCode::ERROR_CODE_ACTION_FORMAT_ERROR, 0);
 		log_error($responseError);
 		return $responseError;
 	}
