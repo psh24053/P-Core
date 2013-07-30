@@ -13,6 +13,8 @@ require_once 'util/Loader_Support.php';
 require_once 'util/Request_Support.php';
 // 载入ErrorCode支持库
 require_once 'util/ErrorCode_Support.php';
+// 载入AUT支持库
+require_once 'util/AUT_Support.php';
 /*
  * 设置字符编码
  */
