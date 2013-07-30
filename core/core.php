@@ -11,6 +11,8 @@ require_once 'util/MySQL_Support.php';
 require_once 'util/Loader_Support.php';
 // 载入Request支持库
 require_once 'util/Request_Support.php';
+// 载入ErrorCode支持库
+require_once 'util/ErrorCode_Support.php';
 /*
  * 设置字符编码
  */
