@@ -31,9 +31,9 @@ function responseErrorByString($errorCode, $customMsg = ""){
 function responseErrorByJSON($errorCode, $actionCode, $customMsg = ""){
 	$response->cod = $actionCode;
 	$response->res = false;
-	$response->prm->errorCode = $errorCode;
-	$response->prm->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
-	$response->prm->customMsg = $customMsg;
+	$response->pld->errorCode = $errorCode;
+	$response->pld->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
+	$response->pld->customMsg = $customMsg;
 	
 	return json_encode($response);
 }

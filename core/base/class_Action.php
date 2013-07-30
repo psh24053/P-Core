@@ -38,12 +38,13 @@ abstract class Action {
 	 * @param String $errmsg
 	 * @return object $response
 	 */
-	public function toError($action, $errcode = 5000, $errmsg = 'Action Execute Exception !'){
+	public function toError($action, $errorCode = 8500, $customMsg = ""){
 		
 		$response->cod = $action->cod;
 		$response->res = false;
-		$response->pld->errcode = $errcode;
-		$response->pld->errmsg = $errmsg;
+		$response->pld->errorCode = $errorCode;
+		$response->pld->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
+		$response->pld->customMsg = $customMsg;
 		
 		return $response;
 	}
