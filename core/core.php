@@ -26,7 +26,7 @@ date_default_timezone_set('Asia/Shanghai');
 /*
  * 设置日志级别 
  */
-$GLOBALS['log_level'] = 'error';
+$GLOBALS['log_level'] = 'debug';
 /*
  * 配置数据库连接信息
  */
@@ -34,7 +34,7 @@ $dbconfig['host']='localhost';//数据库主机
 $dbconfig['user']='root';//数据库用户名
 $dbconfig['pass']='root';//数据库密码
 $dbconfig['port']='3306';//数据库端口，mysql默认是3306，一般不需要修改
-$dbconfig['dbname']='laoyou';//数据库名
+$dbconfig['dbname']='pteam';//数据库名
 $dbconfig['charset']='utf8';//数据库编码
 // mysql全局Helper
 $GLOBALS['mysql'] = new MySQL_Support($dbconfig);

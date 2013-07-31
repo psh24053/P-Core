@@ -6,7 +6,10 @@
  * @return string
  */
 function GenerateAut($obj){
-	$autMap = $GLOBALS['aut_map'];
+	$autMap = null;
+	if(isset($GLOBALS['aut_map'])){
+		$autMap = $GLOBALS['aut_map'];
+	}
 	
 	$aut = md5(time());
 	
@@ -23,19 +26,50 @@ function GenerateAut($obj){
  * @return boolean
  */
 function checkAutExist($aut){
-	$autMap = $GLOBALS['aut_map'];
+	$autMap = null;
+	if(isset($GLOBALS['aut_map'])){
+		$autMap = $GLOBALS['aut_map'];
+	}
 	
 	$obj = $autMap[$aut];
 	
 	return isset($obj);
 	
 }
-
+/**
+ * 获取aut对应的对象
+ * @param string $aut
+ * @return object
+ */
 function getAutObject($aut){
-	$autMap = $GLOBALS['aut_map'];
+	$autMap = null;
+	if(isset($GLOBALS['aut_map'])){
+		$autMap = $GLOBALS['aut_map'];
+	}
 	
+	return $autMap[$aut];
 	
-	
-	
-	
+}
+/**
+ * 清除某个aut信息
+ * @param string $aut
+ */
+function removeAut($aut){
+	$autMap = null;
+	if(isset($GLOBALS['aut_map'])){
+		$autMap = $GLOBALS['aut_map'];
+	}
+	unset($autMap[$aut]);
+	$GLOBALS['aut_map'] = $autMap;
+}
+/**
+ * 清除所有的aut信息
+ */
+function clearAutMap(){
+	$autMap = null;
+	if(isset($GLOBALS['aut_map'])){
+		$autMap = $GLOBALS['aut_map'];
+	}
+	unset($autMap);
+	$GLOBALS['aut_map'] = $autMap;
 }

@@ -6,10 +6,13 @@
  * @param boolean $object true代表返回类型为对象，false代表返回类型为字符串
  * @return object
  */
-function localRequest($cod, $prm, $object = true){
+function localRequest($cod, $prm, $aut = null, $object = true){
 	
 	$action->cod = $cod;
 	$action->prm = isset($prm) ? $prm : '{}';
+	if(isset($aut)){
+		$action->aut = $aut;
+	}
 	
 	$response = handlerRequest(json_encode($action));
 	
@@ -83,8 +86,7 @@ function handlerRequest($json){
 
 	$a = $actions[$cod];
 	
-	$responseContent = $a->instance->doAction($jsonObject);
-	
+	$responseContent = $a->doAction($jsonObject);
 	log_debug("handler response ".json_encode($responseContent));
 	
 	return $responseContent;

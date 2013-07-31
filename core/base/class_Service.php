@@ -1,26 +1,16 @@
 <?php
 
 /**
- *
+ * Service基类
  * @author Panshihao
  *        
  */
 class Service {
 	// TODO - Insert your code here
 	
-	/**
-	 */
-	function __construct() {
-		
-		// TODO - Insert your code here
-	}
+	public $item;
 	
-	/**
-	 */
-	function __destruct() {
-		
-		// TODO - Insert your code here
-	}
+	
 }
 
 ?>

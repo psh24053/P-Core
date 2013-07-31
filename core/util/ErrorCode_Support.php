@@ -38,13 +38,28 @@ class ErrorCode {
 	 */
 	const ERROR_CODE_MISSING_PARAMETER = 8504;
 	const ERROR_MSG_MISSING_PARAMETER = '缺少所需参数';
+	/**
+	 * code 8505 缺少Aut授权令牌
+	 * @var int
+	 */
+	const ERROR_CODE_AUT_NOT_FOUND = 8505;
+	const ERROR_MSG_AUT_NOT_FOUND = '缺少Aut授权令牌';
+	/**
+	 * code 8506 Aut授权令牌错误
+	 * @var int
+	 */
+	const ERROR_CODE_AUT_ERROR = 8506;
+	const ERROR_MSG_AUT_ERROR = 'Aut授权令牌错误';
+	
 	
 	public static $ERROR_CODE = array(
 			8500 => ErrorCode::ERROR_MSG_SERVER_ERROR,
 			8501 => ErrorCode::ERROR_MSG_NOT_JSON_STRING,
 			8502 => ErrorCode::ERROR_MSG_ACTION_FORMAT_ERROR,
 			8503 => ErrorCode::ERROR_MSG_ACTION_NOT_FOUND,
-			8504 => ErrorCode::ERROR_MSG_MISSING_PARAMETER
+			8504 => ErrorCode::ERROR_MSG_MISSING_PARAMETER,
+			8505 => ErrorCode::ERROR_MSG_AUT_NOT_FOUND,
+			8506 => ErrorCode::ERROR_MSG_AUT_ERROR
 			);
 }
 

@@ -57,6 +57,7 @@ function load_Service(){
  * 过滤掉不是class，没有继承Action类的文件
  */
 function load_Action(){
+	unset($GLOBALS['actions']);
 	$actions = array();
 	
 	$list = scandir('core/action');
@@ -98,17 +99,13 @@ function load_Action(){
 			
 			if(isset($o) && isset($o->actionCode)){
 				
-				$obj->actionCode = $o->actionCode;
-				$obj->actionName = $o->actionName;
-				$obj->instance = $o;
-				$actions[$obj->actionCode] = $obj;
+				$actions[$o->actionCode] = $o;
 			}
 			
 		}
 		
 		
 	}
-	
 	$GLOBALS['actions'] = $actions;
 	return $actions;
 }

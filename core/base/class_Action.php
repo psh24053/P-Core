@@ -43,8 +43,8 @@ abstract class Action {
 		$response->cod = $action->cod;
 		$response->res = false;
 		$response->pld->errorCode = $errorCode;
-		$response->pld->errorMsg = ErrorCode::$ERROR_CODE[$errorCode];
-		$response->pld->customMsg = $customMsg;
+		$response->pld->errorMsg = isset(ErrorCode::$ERROR_CODE[$errorCode]) ? ErrorCode::$ERROR_CODE[$errorCode] : $customMsg;
+		$response->pld->customMsg = isset(ErrorCode::$ERROR_CODE[$errorCode]) ? $customMsg : "";
 		
 		return $response;
 	}
